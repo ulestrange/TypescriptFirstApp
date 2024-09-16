@@ -20,7 +20,7 @@ export const createUser = (req: Request, res: Response) => {
 };
 
 export const updateUser = (req: Request, res: Response) => {
-  // create a new user in the database
+  // update a user in the database
 
   console.log(req.body); //for now just log the data
 
