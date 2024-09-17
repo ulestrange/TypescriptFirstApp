@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 3000;
 
 const app: Application = express();
 
+
+
 app.use(morgan("tiny"));
 app.use(express.json());
 
@@ -26,8 +28,8 @@ app.get("/ping", async (_req : Request, res: Response) => {
 app.get('/bananas', async (_req : Request, res: Response) =>
   res.send('hello world, this is bananas - ha ha ha ha hda ha '));
 
+  app.use('/api/v1/users', userRoutes)
 
-app.use('/api/v1/users', userRoutes)
 
 app.listen(PORT, () => {
     console.log("Server is running on port  --", PORT);
