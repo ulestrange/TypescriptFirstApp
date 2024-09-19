@@ -30,5 +30,5 @@ export const updateUser = (req: Request, res: Response) => {
 export const deleteUser = (req: Request, res: Response) => {
   // logic to delete user by ID from the database
 
-  res.json({"message": `delete user ${req.params.id} from the database`})
+  res.json({"message": `delete user ${req.params.id} from the database`}).status(201)
 };
