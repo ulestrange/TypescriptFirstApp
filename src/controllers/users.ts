@@ -8,7 +8,10 @@ export const getUsers = (req: Request, res: Response) => {
 export const getUserById = (req: Request, res: Response) => {
   // get a single  user by ID from the database
   let id:string = req.params.id;
-  res.json({"message": `get a user ${id} received`})
+  if (id === "una" ) {
+    res.json({"message": `get a user ${id} received`})
+  }
+  
 };
 
 export const createUser = (req: Request, res: Response) => {

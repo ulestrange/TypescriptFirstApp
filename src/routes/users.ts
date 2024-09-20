@@ -7,10 +7,15 @@ import {
   deleteUser,
 } from '../controllers/users';
 
+
+import { authenticateKey } from '../middleware/authAPIKey.middleware';
+
 const router: Router = express.Router();
 
 router.get('/', getUsers);
-router.get('/:id', getUserById);
+//router.get('/:id', authenticateKey,  getUserById);
+router.get('/:id',  getUserById);
+
 router.post('/', createUser);
 router.put('/:id', updateUser);
 router.delete('/:id', deleteUser);
