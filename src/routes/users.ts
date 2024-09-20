@@ -7,7 +7,7 @@ import {
   deleteUser,
 } from '../controllers/users';
 
-import { authenticateKey } from '../middleware/auth';
+import { authenticateKey } from '../middleware/auth.middleware';
 
 const router: Router = express.Router();
 
