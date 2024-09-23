@@ -5,15 +5,24 @@ import express, {Application, Request, Response} from "express" ;
 
 import morgan from "morgan";
 
+import dotenv from "dotenv";
+
+import { Db} from 'mongodb';
+
+dotenv.config();
+
+
 /* internal imports */
 
 import userRoutes from './routes/users';
 import {authenticateKey} from './middleware/auth.middleware';
+import {connectToDatabase} from "./services/database.service";
 
 const PORT = process.env.PORT || 3000;
 
 const app: Application = express();
 
+connectToDatabase()
 
 
 app.use(morgan("tiny"));
