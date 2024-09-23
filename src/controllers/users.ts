@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import User from '../models/user'
 import { collections } from "../services/database.service";
+import { ObjectId} from 'mongodb';
 
 export const getUsers =async  (req: Request, res: Response) => {
-    //to do: get all users from the database
+   
     try {
        const users = (await collections.users?.find({}).toArray()) as User[];
 
@@ -14,10 +15,20 @@ export const getUsers =async  (req: Request, res: Response) => {
    }
 };
 
-export const getUserById = (req: Request, res: Response) => {
+export const getUserById = async (req: Request, res: Response) => {
   // get a single  user by ID from the database
   let id:string = req.params.id;
-  res.json({"message": `get a user ${id} received`})
+  try {
+        
+    const query = { _id: new ObjectId(id) };
+    const user = (await collections.users?.findOne(query)) as User;
+
+    if (user) {
+        res.status(200).send(user);
+    }
+} catch (error) {
+    res.status(404).send(`Unable to find matching document with id: ${req.params.id}`);
+}
 };
 
 export const createUser = async (req: Request, res: Response) => {
