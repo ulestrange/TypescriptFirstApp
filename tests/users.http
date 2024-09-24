@@ -1,0 +1,27 @@
+###
+### POST Request for a user 
+## Expected result is ........
+POST http://localhost:3000/api/v1/users HTTP/3.0
+content-type: application/json
+
+{ "name" : "John Doe",
+   "phonenumber" : "0871234567",
+   "email": "jdoe123@gmail.com"}
+
+###
+PUT http://localhost:3000/api/v1/users/id123 
+content-type: application/json
+
+{ "name" : "new data",
+   "phonenumber" : "0871234567",
+   "email": "jdoe123@gmail.com"}
+
+###
+DELETE http://localhost:3000/api/v1/users/id123 HTTP/1.1
+content-type: application/json
+
+
+###
+GET http://localhost:3000/api/v1/users/id123 HTTP/1.1
+content-type: application/json
+x-api-key: blahblah
