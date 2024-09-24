@@ -4,7 +4,7 @@
 POST http://localhost:3000/api/v1/users HTTP/3.0
 content-type: application/json
 
-{ "name" : "John Doe",
+{ "name" : "New Test",
    "phonenumber" : "0871234567",
    "email": "jdoe123@gmail.com"}
 
@@ -17,11 +17,11 @@ content-type: application/json
    "email": "jdoe123@gmail.com"}
 
 ###
-DELETE http://localhost:3000/api/v1/users/id123 HTTP/1.1
+DELETE http://localhost:3000/api/v1/users/66f1428fd7b69bf0c5ae9988 HTTP/1.1
 content-type: application/json
 
 
 ###
-GET http://localhost:3000/api/v1/users/id123 HTTP/1.1
+GET http://localhost:3000/api/v1/users HTTP/1.1
 content-type: application/json
 x-api-key: blahblah
