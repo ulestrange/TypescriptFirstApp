@@ -31,7 +31,7 @@ app.get("/ping", async (_req : Request, res: Response) => {
 app.get('/bananas', async (_req : Request, res: Response) =>
   res.send('hello world, this is bananas - ha ha ha ha hda ha '));
 
-app.use('/api/v1/users', authenticateKey, userRoutes)
+app.use('/api/v1/users',  userRoutes)
 
 
 app.listen(PORT, () => {

@@ -1,0 +1,5 @@
+DB_CONN_STRING="mongodb+srv://lestrangeuna:passwordV@cluster0.fdfdsa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+DB_NAME="Web2_2024"
+
+
+PORT=3000
