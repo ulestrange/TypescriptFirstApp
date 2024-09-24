@@ -16,13 +16,14 @@ dotenv.config();
 
 import userRoutes from './routes/users';
 import {authenticateKey} from './middleware/auth.middleware';
-import {connectToDatabase} from "./services/database.service";
+
 
 const PORT = process.env.PORT || 3001;
 
 const app: Application = express();
 
-connectToDatabase()
+//const db  = connectToDatabase();
+
 
 
 app.use(morgan("tiny"));
