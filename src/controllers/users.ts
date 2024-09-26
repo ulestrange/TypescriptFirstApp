@@ -37,29 +37,59 @@ export const createUser = async (req: Request, res: Response) => {
   // create a new user in the database
   try {
     const newUser = req.body as User;
+    console.table(newUser);
 
     const result = await usersCollection.insertOne(newUser)
 
     if (result) {
-        res.status(201).location(`${result.insertedId}`).json({message : `Created a new user with id ${result.insertedId}`})}
+        res.status(201)
+        .location(`${result.insertedId}`)
+        .json({message : 
+          `Created a new user with id ${result.insertedId}`})}
         else {
         res.status(500).send("Failed to create a new user.");
         }
     }
    catch (error) {
-    console.error(error);
+    if (error instanceof Error)
+    {
+     console.log(`issue with inserting ${error.message}`);
+    }
+    else{
+      console.log(`error with ${error}`)
+    }
     res.status(400).send(`Unable to create new user`);
 }
 };
 
 
-export const updateUser = (req: Request, res: Response) => {
+export const updateUser = async (req: Request, res: Response) => {
   // update a user in the database
 
   console.log(req.body); //for now just log the data
 
-  res.json({"message": `update user ${req.params.id} with data from the post message`})
+  let id:string = req.params.id;
+ 
+
+  const newData = req.body;
+
+  try {
+
+    const query = { _id: new ObjectId(id) };
+    const result = await usersCollection.updateOne(query, {$set : newData});
+
+    if (result) {
+      res.status(200).json({message : `Updated User`})}
+      else {
+      res.status(400).json({message: `Failed to update user.`});
+      }
+  }
+  catch (error) {
+    //console.error(error);
+    res.status(400).send(`Unable to update user`);
+}
 };
+
 
 export const deleteUser = async (req: Request, res: Response) => { 
   
