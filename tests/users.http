@@ -1,28 +1,56 @@
+
+@path = api/v1/users
+@endpoint = http://localhost:3000/api/v1/users
+
 ###
 ### POST Request for a user 
 ## Expected result is ........
-POST http://localhost:3000/api/v1/users HTTP/3.0
+
+# @name  postAUser
+POST {{endpoint}} HTTP/1.1
 content-type: application/json
 
-{ "name" : "New Test changed model",
-   "email": "jdoe123@gmail.com"}
+{ "name" : "Monday is here",
+   "email": "jdoe123@gmail.com",
+   "status": "pending"
+}
 
 ###
-PUT http://localhost:3000/api/v1/users/id123 
+@newObjectID = {{postAUser.response.headers.location}}
+
+GET {{endpoint}}/{{newObjectID}}
+
+###
+POST {{endpoint}} HTTP/3.0
 content-type: application/json
 
-{ "name" : "changed number type",
+{ "name" : "Checking Date",
+   "email": "jdoe123@gmail.com"
+}
+
+###
+PUT {{endpoint}}/{{firstID}}
+content-type: application/json
+
+{ "name" : "goodbye again",
    "phonenumber" : "0871234567",
    "email": "jdoe123@gmail.com"}
 
+
 ###
-DELETE http://localhost:3000/api/v1/users/66f1428fd7b69bf0c5ae9988 HTTP/1.1
+GET {{endpoint}}/66f2956d53ce2ac5467af205
+
+###
+DELETE http://localhost:3000/api/v1/users/66f2956d53ce2ac5467af205 HTTP/1.1
 content-type: application/json
 
 
 ###
+# @name GETAllUsers
+GET {{endpoint}}
+
+@firstID = {{GETAllUsers.response.body.$[0]._id}}
+
+
 ###
-###
-GET http://localhost:3000/api/v1/users/ HTTP/1.1
-GET http://localhost:3000/api/v1/users/ HTTP/1.1
-x-api-key: blahblah
+GET {{endpoint}}/{{firstID}} HTTP/1.1

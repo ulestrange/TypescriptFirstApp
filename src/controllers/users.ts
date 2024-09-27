@@ -2,8 +2,10 @@ import { Request, Response } from 'express';
 
 
 import { usersCollection } from "../database";
-import User from '../models/user'
+import {User, ValidateUser} from '../models/user'
 import { ObjectId} from 'mongodb';
+
+import joi  from 'joi'
 
 export const getUsers =async  (req: Request, res: Response) => {
    
@@ -12,6 +14,11 @@ export const getUsers =async  (req: Request, res: Response) => {
    res.status(200).json(users);
 
  } catch (error) {
+
+  if (error instanceof Error)
+  {
+    console.log(`Error with get ${error.message}`)
+  }
    res.status(500).send("oppss");
  }
 };
@@ -28,15 +35,40 @@ export const getUserById = async (req: Request, res: Response) => {
     if (user) {
         res.status(200).send(user);
     }
+        else {
+          res.status(404).send(`Unable to find matching document with id: ${req.params.id}`)
+        }
+    
 } catch (error) {
+  if (error instanceof Error)
+  {
+    console.log(`issue with getting a single user ${error.message}`)
+  }
+  else{
+    console.log(`issue with getting a single user ${error}`)
+  }
+
     res.status(404).send(`Unable to find matching document with id: ${req.params.id}`);
 }
 };
 
 export const createUser = async (req: Request, res: Response) => {
-  // create a new user in the database
+  
+ let validateResult : joi.ValidationResult = ValidateUser(req.body)
+
+ if (validateResult.error) {
+   res.status(400).json(validateResult.error);
+   return;
+ }
+
+  const newUser = req.body as User;
+  newUser.dateJoined = new Date();
+  newUser.lastUpdated = new Date();
+
+
+
   try {
-    const newUser = req.body as User;
+    
     console.table(newUser);
 
     const result = await usersCollection.insertOne(newUser)
@@ -65,28 +97,47 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const updateUser = async (req: Request, res: Response) => {
   // update a user in the database
-
-  console.log(req.body); //for now just log the data
-
   let id:string = req.params.id;
  
+// note: this approach relies on getting all of the data which we are
+// validating from the request - so all of the fields are sent not just 
+// the ones with new values. (what about dateJoined ? )
 
-  const newData = req.body;
+let validateResult : joi.ValidationResult = ValidateUser(req.body)
+
+ if (validateResult.error) {
+   res.status(400).json(validateResult.error);
+   return;
+ }
+
+  const newData = ({...req.body, lastUpdated: new Date()})
 
   try {
 
     const query = { _id: new ObjectId(id) };
     const result = await usersCollection.updateOne(query, {$set : newData});
 
-    if (result) {
+    console.table(result);
+
+    if (result.modifiedCount > 0) {
       res.status(200).json({message : `Updated User`})}
-      else {
+    else if (result.matchedCount = 0){
       res.status(400).json({message: `Failed to update user.`});
+      }
+      else 
+      {
+        res.status(404).json({"Message" : `${id} not found `});
       }
   }
   catch (error) {
-    //console.error(error);
-    res.status(400).send(`Unable to update user`);
+    if (error instanceof Error)
+    {
+      console.log(`eror with ${error.message}`);
+    }
+    else {
+      console.error(error);
+    }
+    res.status(400).send(`Unable to update user ${req.params.id}`);
 }
 };
 

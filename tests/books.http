@@ -1,0 +1,39 @@
+###
+### POST Request for a user 
+## Expected result is ........
+POST http://localhost:3000/api/v1/books HTTP/3.0
+content-type: application/json
+
+  {
+    "catNumber": "53c2ae8528d75d572c06adbc",
+    "title": "Changed to test post: Codec: Encoders and Decoders",
+    "isbn": "1932394524j-e",
+    "pageCount": 0,
+    "publishedDate": "2024-09-26",
+    "thumbnailUrl": "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/goyal10.jpg",
+    "status": "PUBLISH",
+    "authors": ["Una L'Estange",
+      "Kevin Peyton"],
+    "categories": ["Dance", "Yoga"]
+  }
+###
+PUT http://localhost:3000/api/v1/users/id123 
+content-type: application/json
+
+{ "name" : "changed number type",
+   "phonenumber" : "0871234567",
+   "email": "jdoe123@gmail.com"}
+
+###
+DELETE http://localhost:3000/api/v1/users/66f1428fd7b69bf0c5ae9988 HTTP/1.1
+content-type: application/json
+
+
+###
+###
+###
+GET http://localhost:3000/api/v1/books/66f5a1e4800c63313033cc40 HTTP/1.1
+x-api-key: blahblah
+
+###
+GET http://localhost:3000/api/v1/books

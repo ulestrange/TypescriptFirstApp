@@ -1,6 +1,9 @@
 import { MongoClient, Db, Collection}  from "mongodb";
 import  dotenv from "dotenv";
-import User from './models/user'
+import {User} from './models/user'
+import {Book} from './models/book'
+
+
 
 
 
@@ -11,6 +14,7 @@ import User from './models/user'
 
 let db : Db 
   export let usersCollection : Collection<User>
+  export let booksCollection : Collection<Book>
 
   export const collections: { users?: Collection<User> } = {};
 
@@ -19,6 +23,7 @@ client.connect().then
   {
   db = client.db(dbName);
   usersCollection  = db.collection('users');
+  booksCollection  = db.collection('books');
   collections.users = usersCollection;
   console.log('Connected to database');
 }
