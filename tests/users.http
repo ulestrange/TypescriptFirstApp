@@ -10,9 +10,10 @@
 POST {{endpoint}} HTTP/1.1
 content-type: application/json
 
-{ "name" : "Monday is here",
+{ "name" : "1245",
    "email": "jdoe123@gmail.com",
-   "status": "pending"
+   "status": "pending",
+   "extra": "what happens"
 }
 
 ###
@@ -25,7 +26,8 @@ POST {{endpoint}} HTTP/3.0
 content-type: application/json
 
 { "name" : "Checking Date",
-   "email": "jdoe123@gmail.com"
+   "email": "jdoe123@gmail.com",
+   "myNumber": "fdaf"
 }
 
 ###
@@ -41,7 +43,7 @@ content-type: application/json
 GET {{endpoint}}/66f2956d53ce2ac5467af205
 
 ###
-DELETE http://localhost:3000/api/v1/users/66f2956d53ce2ac5467af205 HTTP/1.1
+DELETE http://localhost:3000/api/v1/users/{{firstID}} HTTP/1.1
 content-type: application/json
 
 
@@ -54,3 +56,7 @@ GET {{endpoint}}
 
 ###
 GET {{endpoint}}/{{firstID}} HTTP/1.1
+
+
+###
+GET {{endpoint}}/123 HTTP/1.1

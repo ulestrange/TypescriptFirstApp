@@ -30,6 +30,7 @@ export const getUserById = async (req: Request, res: Response) => {
   let id:string = req.params.id;
   try {
     const query = { _id: new ObjectId(id) };
+
     const user = (await usersCollection.findOne(query)) as User;
 
     if (user) {
@@ -60,10 +61,13 @@ export const createUser = async (req: Request, res: Response) => {
    res.status(400).json(validateResult.error);
    return;
  }
+  let newUser = req.body as User;
 
-  const newUser = req.body as User;
   newUser.dateJoined = new Date();
   newUser.lastUpdated = new Date();
+
+
+  //const newUser = (...req.body , )
 
 
 
