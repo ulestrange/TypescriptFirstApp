@@ -2,8 +2,9 @@ import { Request, Response } from 'express';
 
 
 import { usersCollection } from "../database";
-import {User} from '../models/user'
+import {User, ValidateUser} from '../models/user'
 import { ObjectId} from 'mongodb';
+import Joi from 'joi';
 
 export const getUsers =async  (req: Request, res: Response) => {
    
@@ -49,8 +50,19 @@ export const getUserById = async (req: Request, res: Response) => {
 export const createUser = async (req: Request, res: Response) => {
   // create a new user in the database
   try {
+
+    let validateResult : Joi.ValidationResult = ValidateUser(req.body)
+
+    if (validateResult.error) {
+      res.status(400).json(validateResult.error);
+      return;
+    }
+   
+
     const newUser = req.body as User;
-    console.table(newUser);
+
+    newUser.dateJoined = new Date();
+    newUser.lastUpdated = new Date();
 
     const result = await usersCollection.insertOne(newUser)
 
@@ -79,12 +91,21 @@ export const createUser = async (req: Request, res: Response) => {
 export const updateUser = async (req: Request, res: Response) => {
   // update a user in the database
 
-  console.log(req.body); //for now just log the data
+ const {name, email, phonenumber } = req.body;
 
   let id:string = req.params.id;
  
 
-  const newData = req.body;
+  const newData: Partial<User> =
+  {
+    lastUpdated: new Date(),
+  }
+
+  if (name) newData.name = name;
+  if(email) newData.email = email;
+  if (phonenumber) newData.phonenumber = phonenumber;
+
+  // still need to validate the data
 
   try {
 
