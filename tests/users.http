@@ -16,13 +16,12 @@ content-type: application/json
    "email": "jdoe123@gmail.com"}
 
 ###
-DELETE http://localhost:3000/api/v1/users/66f1428fd7b69bf0c5ae9988 HTTP/1.1
+DELETE http://localhost:3000/api/v1/users/66f1428fd79bf0c5ae9988 HTTP/1.1
 content-type: application/json
 
 
 ###
 ###
 ###
-GET http://localhost:3000/api/v1/users/ HTTP/1.1
-GET http://localhost:3000/api/v1/users/ HTTP/1.1
+GET http://localhost:3000/api/v1/users/678 HTTP/1.1
 x-api-key: blahblah

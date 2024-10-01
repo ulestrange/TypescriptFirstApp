@@ -129,6 +129,11 @@ export const deleteUser = async (req: Request, res: Response) => {
         res.status(404).json({message: `no user fround with id ${id}`});
     }
 } catch (error) {
+  if (error instanceof Error)
+   console.error(`eror with ${error.message}`);
+   else {
     console.error(error);
-    res.status(400).send(error);
-}};
+  }
+  res.status(400).send(`Unable to delete user ${req.params.id}`);
+}
+};
