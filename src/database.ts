@@ -1,6 +1,6 @@
 import { MongoClient, Db, Collection}  from "mongodb";
 import  dotenv from "dotenv";
-import User from './models/user'
+import {User} from './models/user'
 
 
 
