@@ -8,6 +8,12 @@ import { ObjectId} from 'mongodb';
 import joi  from 'joi'
 
 export const getBooks =async  (req: Request, res: Response) => {
+
+  const { filter } = req.query;
+  // Parse the filter, projection, and sort parameters
+  // const filterObj = filter ? JSON.parse(filter as string) : {};
+  // const projectionObj = projection ? JSON.parse(projection as string) : {};
+  // const sortObj = sort ? JSON.parse(sort as string) : {};
    
   try {
    const books = (await booksCollection.find().toArray()) ;
