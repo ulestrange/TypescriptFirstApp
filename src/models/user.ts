@@ -13,11 +13,11 @@ export interface User {
 
 export const ValidateUser = (user : User) => {
 
-    const contactJoiSchema = Joi.object<User>({
+    const userJoiSchema = Joi.object<User>({
        name: Joi.string().min(3).required() ,
        phonenumber: Joi.string().min(10),
        email: Joi.string().email().required(),    
     })
 
-    return contactJoiSchema.validate(user);
+    return userJoiSchema.validate(user);
 }

@@ -15,6 +15,7 @@ dotenv.config();
 /* internal imports */
 
 import userRoutes from './routes/users';
+import gradeHistoriesRoutes from './routes/gradeHistories'
 import {authenticateKey} from './middleware/auth.middleware';
 
 const PORT = process.env.PORT || 3006;
@@ -39,6 +40,7 @@ app.get('/bananas', async (_req : Request, res: Response) =>
   res.send('hello world, this is bananas - ha ha ha ha hda ha '));
 
 app.use('/api/v1/users',  userRoutes)
+app.use('/api/v1/gradeHistories',  gradeHistoriesRoutes)
 
 
 app.listen(PORT, () => {
