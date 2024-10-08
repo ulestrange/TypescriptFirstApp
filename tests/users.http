@@ -5,7 +5,8 @@ POST http://localhost:3000/api/v1/users HTTP/3.0
 content-type: application/json
 
 { "name" : "New Test changed model",
-   "email": "jdoe123@gmail.com"}
+   "email": "jdoe123@gmail.com",
+   "sillt": "reject this"}
 
 ###
 PUT http://localhost:3000/api/v1/users/id123 
