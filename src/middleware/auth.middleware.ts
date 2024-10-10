@@ -6,7 +6,7 @@ export const authenticateKey = async (req : Request, res : Response, next : Next
     const apiKey = req.headers['x-api-key'];
 
     if (!apiKey) {
-        return res.status(401).json({'message' : 'Unauthorized: API key is missing'});
+        res.status(401).json({'message' : 'Unauthorized: API key is missing'});
     }
     next();
 };
