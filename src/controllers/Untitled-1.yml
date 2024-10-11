@@ -1,0 +1,32 @@
+openapi: '3.0.3'
+info:
+  title: API Title
+  version: '1.0'
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /test:
+    get:
+      responses:
+        '200':
+          description: OK
+  /users:
+    get:
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: OK
+    post:
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /users/{userid}:
+    get:
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: OK
