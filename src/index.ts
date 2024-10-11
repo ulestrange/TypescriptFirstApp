@@ -23,7 +23,7 @@ const app: Application = express();
 app.use(morgan("tiny"));
 app.use(express.json());
 
-app.use(authenticateKey); // all the routes below
+//app.use(authenticateKey); // all the routes below
 
 app.get("/ping", async (_req: Request, res: Response) => {
   res.json({
