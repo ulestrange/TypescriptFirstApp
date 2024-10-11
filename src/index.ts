@@ -39,5 +39,5 @@ app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/gradeHistories", gradeHistoriesRoutes);
 
 app.listen(PORT, () => {
-  console.log("Server is running on port  --", PORT);
+  console.log("Server is running on port ready for deploy 1 --", PORT);
 });
