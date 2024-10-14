@@ -1,0 +1,44 @@
+openapi: '3.0.3'
+info:
+  title: Una's Lovely API
+  version: '1.0'
+servers: 
+   - url: https://typescriptfirstapp-1.onrender.com
+     description: Live demo server
+   - url: http://localhost:300/api/v1
+     description: development server
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The string of the objectID for the userid
+        phonenumber: 
+          type: string
+        email: 
+          type: string
+        datejoined:
+          type: string
+        lastupdated:
+          type: string
+paths:
+
+  /users:
+    get:
+      description: 'Gets all users'
+      parameters: []
+      responses:
+        '200':
+          description: A list of users'
+          content: 
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/User'
+        '500':
+          description: Server Error
+          
+

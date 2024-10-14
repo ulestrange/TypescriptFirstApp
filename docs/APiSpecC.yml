@@ -1,0 +1,61 @@
+openapi: '3.0.3'
+info:
+  title: Una's api
+  version: '1.0'
+servers:
+  - url: http://localhost:3000/api/v1
+    description: The development servers
+  - url: https://typescriptfirstapp-1.onrender.com
+    description: the live demo  
+paths:
+  /users:
+    get:
+      description: Returns a list of all users
+      responses:
+        '200':
+          description: a list of all users.
+        '500':
+          description: Server Error
+    post:
+      description: Add a user to the collection
+      parameters: []
+      responses:
+        '201':
+          description: OK
+        '500':
+          description: Server error
+  /users/{userid}:
+    get:
+      description: 'gets a single users.'
+      parameters: 
+        - in: path
+          name: userid
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: user not found
+        '500':
+          description: Server error
+    delete:
+      description: 'deletes a single user.'
+      parameters: 
+        - in: path
+          name: userid
+          required: true
+          schema: 
+            type: string
+      responses:
+        '202':
+          description: successfully removed
+        '404':
+          description: user not found
+        '400':
+          description: found but not deleted
+        '500':
+          description: server error
+
+   
