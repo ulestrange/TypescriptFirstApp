@@ -9,6 +9,7 @@ export const authenticateKey = async (
 
   if (!apiKey) {
     res.status(401).json({ message: "Unauthorized: API key is missing" });
+    return;
   }
   next();
 };
