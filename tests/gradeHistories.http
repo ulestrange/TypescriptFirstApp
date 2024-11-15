@@ -4,23 +4,26 @@ GET http://localhost:3000/api/v1/gradeHistories?filter={"class_id":1} HTTP/3.0
 
 ###
 
-POST http://localhost:3000/api/v1/gradeHistories
+
+GET http://localhost:3000/api/v1/gradeHistories/50b59cd75bed76f46522c375
+
+
+
+POST http://localhost:3000/api/v1/gradeHistories/
 content-type: application/json
 
-{"student_id" : 50, 
- "class_id" : 29,
+{"student_id" : "30", 
  "scores" : [{"type" :"exam" ,
- "score": 20}] }
+ "score": "20" }] }
 
 
 ###
-PUT http://localhost:3000/api/v1/gradeHistories/
-
+PUT http://localhost:3000/api/v1/gradeHistories/50b59cd75bed76f46522c375
 content-type: application/json
 
-{"type" : "quiz",
- "score" : 100 }
-
+{"student_id" : "300000", 
+ "scores" : [{"type" :"exam" ,
+ "score": "20" }] }
 
 
 ### 

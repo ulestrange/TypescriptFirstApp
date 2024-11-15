@@ -19,6 +19,7 @@ const scoreSchema = Joi.object({
 });
 
 export const ValidateScore = (score: Score) =>{
+    console.table(score)
     return scoreSchema.validate(score)
 }    
 export const ValidateGradeHistory = (gradeHistory : GradeHistory) => {
