@@ -6,6 +6,7 @@ import {
   createGradeHistory,
   updateGradeHistory,
   getGradeHistoryByID,
+  deleteGradeHistory,
 } from "../controllers/gradeHistories";
 
 const router: Router = express.Router();
@@ -21,5 +22,7 @@ router.get("/student/:id", getGradesForStudent);
 router.post("/", createGradeHistory);
 
 router.put("/:id", updateGradeHistory);
+
+router.delete("/:id", deleteGradeHistory);
 
 export default router;

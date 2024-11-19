@@ -56,7 +56,7 @@ export const getGradeHistoryByID = async (req: Request, res: Response) => {
     if (error instanceof Error) {
       console.log(`issue with getting a single grade History ${error.message}`);
     } else {
-      console.log(`issue with getting a single user ${error}`);
+      console.log(`issue with getting a single GradeHistory ${error}`);
     }
     res
       .status(404)
@@ -103,10 +103,33 @@ export const updateGradeHistory = async (req: Request, res: Response) => {
     else {
       console.error(error);
     }
-    res.status(400).send(`Unable to update user ${req.params.id}`);
+    res.status(400).send(`Unable to update GradeHistory ${req.params.id}`);
 }
 };
 
+export const deleteGradeHistory = async (req: Request, res: Response) => { 
+  
+  let id:string = req.params.id;
+  try {
+    const query = { _id: new ObjectId(id) };
+    const result = await gradeHistoriesCollection.deleteOne(query);
+
+    if (result && result.deletedCount) {
+        res.status(202).json({message :`Successfully removed GradeHistory with id ${id}`});
+    } else if (!result) {
+        res.status(400).json({message: `Failed to remove GradeHistory with id ${id}`});
+    } else if (!result.deletedCount) {
+        res.status(404).json({message: `no GradeHistory fround with id ${id}`});
+    }
+} catch (error) {
+  if (error instanceof Error)
+   console.error(`eror with ${error.message}`);
+   else {
+    console.error(error);
+  }
+  res.status(400).send(`Unable to delete GradeHistory ${req.params.id}`);
+}
+};
 
 
 /*
