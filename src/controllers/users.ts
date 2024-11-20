@@ -5,11 +5,14 @@ import { usersCollection } from "../database";
 import {User, ValidateUser} from '../models/user'
 import { ObjectId} from 'mongodb';
 import Joi from 'joi';
+import * as argon2 from 'argon2';
 
-export const getUsers =async  (req: Request, res: Response) => {
+export const getUsers = async  (req: Request, res: Response) => {
    
   try {
-   const users = (await usersCollection.find({}).toArray()) as User[];
+   const users = (await usersCollection.find({})
+   .project ({hashedPassword : 0}).
+   toArray()) as User[];
    res.status(200).json(users);
 
  } catch (error) {
@@ -57,12 +60,29 @@ export const createUser = async (req: Request, res: Response) => {
       res.status(400).json(validateResult.error);
       return;
     }
+
+    const existingUser = await usersCollection.findOne({email: req.body.email})
+
+    if (existingUser) {
+      res.status(400).json({"error": "existing email"});
+      return;
+    }
+
+    /// note - missing a check to verify the email belongs to the user
    
 
-    const newUser = req.body as User;
+    let newUser : User = 
+    { 
+      name: req.body.name ,
+      email: req.body.email,
+      phonenumber : req.body.phonenumber,
+      dateJoined : new Date(),
+      lastUpdated :new Date(),
+    }
 
-    newUser.dateJoined = new Date();
-    newUser.lastUpdated = new Date();
+    newUser.hashedPassword = await argon2.hash(req.body.password)
+
+    console.log(newUser.hashedPassword)
 
     const result = await usersCollection.insertOne(newUser)
 
