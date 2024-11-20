@@ -1,13 +1,14 @@
+import { Request, Response, NextFunction } from "express";
 
-import { Request, Response, NextFunction } from 'express';
+export const authenticateKey = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const apiKey = req.headers["x-api-key"];
 
-
-export const authenticateKey = async (req : Request, res : Response, next : NextFunction) => {
-    const apiKey = req.headers['x-api-key'];
-
-    if (!apiKey) {
-        return res.status(401).json({'message' : 'Unauthorized: API key is missing'});
-    }
-    next();
+  if (!apiKey) {
+    res.status(401).json({ message: "Unauthorized: API key is missing" });
+  }
+  next();
 };
-
