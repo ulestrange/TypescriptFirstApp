@@ -74,7 +74,7 @@ export const createUser = async (req: Request, res: Response) => {
     let newUser : User = 
     { 
       name: req.body.name ,
-      email: req.body.email,
+      email: req.body.email.toLowerCase(),
       phonenumber : req.body.phonenumber,
       dateJoined : new Date(),
       lastUpdated :new Date(),
@@ -82,7 +82,7 @@ export const createUser = async (req: Request, res: Response) => {
 
     newUser.hashedPassword = await argon2.hash(req.body.password)
 
-    console.log(newUser.hashedPassword)
+    //console.log(newUser.hashedPassword)
 
     const result = await usersCollection.insertOne(newUser)
 
@@ -178,3 +178,5 @@ export const deleteUser = async (req: Request, res: Response) => {
   res.status(400).send(`Unable to delete user ${req.params.id}`);
 }
 };
+
+

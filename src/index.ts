@@ -16,7 +16,9 @@ dotenv.config();
 /* internal imports */
 
 import userRoutes from "./routes/users";
+
 import gradeHistoriesRoutes from "./routes/gradeHistories";
+import authRoutes from "./routes/auth";
 
 import { authenticateKey } from "./middleware/auth.middleware";
 
@@ -56,6 +58,7 @@ app.get("/bananas", async (_req: Request, res: Response) => {
 
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/gradeHistories", gradeHistoriesRoutes);
+app.use("/api/v1/auth", authRoutes);
 
 app.listen(PORT, () => {
   console.log("Server is running on port ready for deploy 1 --", PORT);
