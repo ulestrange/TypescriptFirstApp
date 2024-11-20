@@ -4,7 +4,37 @@ GET http://localhost:3000/api/v1/gradeHistories?filter={"class_id":1} HTTP/3.0
 
 ###
 
+
+GET http://localhost:3000/api/v1/gradeHistories/50b59cd75bed76f46522c375
+
+
+
+POST http://localhost:3000/api/v1/gradeHistories/
+content-type: application/json
+
+{"student_id" : "30", 
+ "scores" : [{"type" :"exam" ,
+ "score": "20" }] }
+
+
+###
+PUT http://localhost:3000/api/v1/gradeHistories/50b59cd75bed76f46522c375
+content-type: application/json
+
+{"student_id" : "300000", 
+ "scores" : [{"type" :"exam" ,
+ "score": "20" }] }
+
+
+### 
 ## Expected result is ........
 GET http://localhost:3000/api/v1/gradeHistories?filter={"scores": {"$elemMatch": {"type": "homework", "score": { "$gt": 99 }}}} HTTP/3.0
 
+###
+GET http://localhost:3000/api/v1/gradeHistories HTTP/3.0
 
+###
+GET http://localhost:3000/api/v1/gradeHistories?pageSize=6,page=4 HTTP/3.0
+
+###
+GET http://localhost:3000/api/v1/gradeHistories/class/3
