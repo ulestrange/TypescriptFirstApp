@@ -5,9 +5,11 @@ import express, { Application, Request, Response } from "express";
 import morgan from "morgan";
 import cors from "cors";
 
+
 import dotenv from "dotenv";
 
 import { Db } from "mongodb";
+
 
 dotenv.config();
 
@@ -25,15 +27,18 @@ const app: Application = express();
 app.use(morgan("tiny"));
 app.use(express.json());
 
+
 // const corsOptions = {
 //   origin: ['http://localhost:4200'],
 //   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 // }
 
-const corsOptions = {};
+//const corsOptions = {};
 //app.use(cors<Request>(corsOptions)); // this is too braod need to narrow
 
+
 app.use(cors());
+
 
 //app.use(authenticateKey); // all the routes below
 
