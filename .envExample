@@ -5,3 +5,4 @@ DB_NAME="Web2_2024"
 PORT=3000
 
 JWTSECRET = "una is great"
+JWTEXPIRES = 1200

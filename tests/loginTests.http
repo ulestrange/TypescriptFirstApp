@@ -1,33 +1,37 @@
 
-### POST Request for a user 
-## Expected result is ........
-POST http://localhost:3000/api/v1/users HTTP/3.0
-content-type: application/json
 
-{ "name" : "New Test changed model",
-   "email": "j4doe123@gmail.com"
-}
 
-### POST Request for a user 
-## Expected result is ........
-POST http://localhost:3000/api/v1/users HTTP/3.0
-content-type: application/json
 
-{ "name" : "New Test changed model",
-   "email": "j4doe123458@gmail.com",
-   "password": "password"
-}
 
-### POST Request for a user 
-## Expected result is ........
+
+### Auth Request for a user with a valid password and email
+## Expected result is a body with an access token
+# @name login
 POST http://localhost:3000/api/v1/auth HTTP/3.0
 content-type: application/json
 
 { 
   "email": "j4doe123458@gmail.com",
    "password": "password"
-
 }
+
+###
+
+@accessToken = {{login.response.body.accessToken}}
+
+
+### this should fail because there is no token
+###
+
+DELETE http://localhost:3000/api/v1/users/66f1428fd79bf0c5ae9988 HTTP/1.1
+content-type: application/json
+
+### this should pass because there is a token
+###
+
+DELETE http://localhost:3000/api/v1/users/66f1428fd79bf0c5ae9988 HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
 
 
 ###
