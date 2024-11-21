@@ -58,7 +58,8 @@ export const handleLogin = async (req: Request, res: Response) => {
 const createAccessToken = (user: User | null) : string  => {
 
     const secret = process.env.JWTSECRET || "not very secret";
-    const expiresTime = 1800;
+    const expiresTime = process.env.JWTEXPIRES || 1800;
+    console.log(expiresTime);
     const payload =
     {
         email: user?.email,
