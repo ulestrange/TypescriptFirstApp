@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { verify as jwtVerify } from 'jsonwebtoken'
-import { LEGAL_TCP_SOCKET_OPTIONS } from "mongodb";
+
 
 export const authenticateKey = async (
   req: Request,

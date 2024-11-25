@@ -51,18 +51,18 @@ export const handleLogin = async (req: Request, res: Response) => {
         res.status(201).send({ accessToken: createAccessToken(user) });
 
 
-      // res.status(201).send({ accessToken: await createJwt(user) })
       }
 
 
 const createAccessToken = (user: User | null) : string  => {
 
     const secret = process.env.JWTSECRET || "not very secret";
-    const expiresTime = process.env.JWTEXPIRES || 1800;
+    const expiresTime = process.env.JWTEXPIRES || 300;
     console.log(expiresTime);
     const payload =
     {
         email: user?.email,
+        name: user?.name
     }
     const token = jwtSign(payload, secret, {expiresIn : expiresTime }); 
 

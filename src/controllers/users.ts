@@ -32,7 +32,8 @@ export const getUserById = async (req: Request, res: Response) => {
   let id:string = req.params.id;
   try {
     const query = { _id: new ObjectId(id) };
-    const user = (await usersCollection.findOne(query)) as User;
+    const user = await usersCollection.findOne(query, 
+      { projection: { hashedPassword: 0 } }) as User;
 
     if (user) {
         res.status(200).send(user);
