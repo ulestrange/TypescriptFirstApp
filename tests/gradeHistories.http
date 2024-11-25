@@ -5,7 +5,7 @@ GET http://localhost:3000/api/v1/gradeHistories?filter={"class_id":1} HTTP/3.0
 ###
 
 
-GET http://localhost:3000/api/v1/gradeHistories/50b59cd75bed76f46522c375
+GET http://localhost:3000/api/v1/gradeHistories/67363be6eed4a537f2e9e41c
 
 
 
@@ -18,7 +18,15 @@ content-type: application/json
 
 
 ###
-PUT http://localhost:3000/api/v1/gradeHistories/50b59cd75bed76f46522c375
+PUT http://localhost:3000/api/v1/gradeHistories/67363be6eed4a537f2e9e41c
+content-type: application/json
+
+{"student_id" : "201", 
+ "scores" : [],
+ "class_id" : "201" }
+
+###
+PUT http://localhost:3000/api/v1/gradeHistories/67363be6eed4a537f2e9e41c
 content-type: application/json
 
 {"student_id" : "300000", 
