@@ -49,7 +49,7 @@ export const handleLogin = async (req: Request, res: Response) => {
 
         res.status(201)
         .cookie('refreshToken' , createRefreshToken(user),
-         {maxAge: 1 * 24 * 60 * 60 * 1000})
+         {maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true})
         .send({ accessToken: createAccessToken(user) });
 
 
@@ -88,7 +88,7 @@ export const handleRefresh = async (req: Request, res: Response) => {
     
       res.status(201)
       .cookie('refreshToken' , createRefreshToken(user),
-      {maxAge: 1 * 24 * 60 * 60 * 1000})
+      {maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true})
       .send({ accessToken: createAccessToken(user) });
       return;
 }
