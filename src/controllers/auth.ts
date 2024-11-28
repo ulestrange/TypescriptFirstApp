@@ -6,7 +6,6 @@ import { User } from '../models/user';
 
 export const handleLogin = async (req: Request, res: Response) => {
 
-
     const email = req.body?.email
     
     const password = req.body?.password
@@ -19,7 +18,7 @@ export const handleLogin = async (req: Request, res: Response) => {
     }
       const user = await usersCollection.findOne({
         email: email.toLowerCase(),
-      })
+      }) as User;
   
       const dummyPassword = 'dummy_password';
       const dummyHash = await argon2.hash(dummyPassword);
@@ -48,10 +47,72 @@ export const handleLogin = async (req: Request, res: Response) => {
           return;
         }
 
-        res.status(201).send({ accessToken: createAccessToken(user) });
+        res.status(201)
+        .cookie('refreshToken' , createRefreshToken(user),
+         {maxAge: 1 * 24 * 60 * 60 * 1000})
+        .send({ accessToken: createAccessToken(user) });
 
 
       }
+
+
+export const handleRefresh = async (req: Request, res: Response) => {
+
+  const cookie = req.cookies?.refreshToken;
+
+  if (!cookie){
+    res.status(401).json('No refresh cookie received');
+    return;
+  }
+
+  const email = cookie.split(':')[0];
+  console.log ('email ' + email);
+  const token = cookie.split(':')[1];
+
+  const user = await usersCollection.findOne({email : req.body.email}) as User;
+
+  if (!user) {
+    res.status(401).json('Auth failed - userid not valid');
+    return}
+
+
+  const storedToken = getSavedToken(user);
+
+  if (!token || storedToken != token) {
+         res.status(401).json('Auth failed - token not found or matched');
+        return;
+  }
+
+
+  // here we have a matching refresh token create a new JWT and return.
+    
+      res.status(201)
+      .cookie('refreshToken' , createRefreshToken(user),
+      {maxAge: 1 * 24 * 60 * 60 * 1000})
+      .send({ accessToken: createAccessToken(user) });
+      return;
+}
+
+
+export const handleLogout = async (req: Request, res: Response) => {
+  console.log('logout received')
+  res.status(201)
+      .clearCookie('refreshToken')
+      .json({"logged out" : "true"});
+      return;
+}
+
+// These are two duumy functions
+// we will not be looking at how to create and cycle refresh tokens 
+// in this  module.
+
+const createRefreshToken = (user : User) => {
+  return user.email + ':testagain';
+}
+
+const getSavedToken = (user : User) => {
+  return 'testagain';
+}
 
 
 const createAccessToken = (user: User | null) : string  => {
@@ -67,7 +128,21 @@ const createAccessToken = (user: User | null) : string  => {
     const token = jwtSign(payload, secret, {expiresIn : expiresTime }); 
 
     return token;
-
 }
+
+// const createRefreshToken = (user: User | null) : string  => {
+
+//   const secret = process.env.REFRESHSECRET || "not very secret";
+//   const expiresTime = process.env.REFRESHEXPIRES || 600;
+//   console.log(expiresTime);
+//   const payload =
+//   {
+//       email: user?.email
+//   }
+//   const token = jwtSign(payload, secret, {expiresIn : expiresTime }); 
+
+//   return token;
+
+// }
 
   

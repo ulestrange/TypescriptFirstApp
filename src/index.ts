@@ -4,12 +4,11 @@ import express, { Application, Request, Response } from "express";
 
 import morgan from "morgan";
 import cors from "cors";
-
+import cookieParser from "cookie-parser";
 
 import dotenv from "dotenv";
 
 import { Db } from "mongodb";
-
 
 dotenv.config();
 
@@ -26,23 +25,16 @@ const PORT = process.env.PORT || 3006;
 
 const app: Application = express();
 
-
-
 app.use(morgan("tiny"));
 app.use(express.json());
+app.use(cookieParser())
 
+const corsOptions = {
+  origin: ["http://localhost:4200", "http://localhost:3000"],
+  credentials: true,
+};
 
-// const corsOptions = {
-//   origin: ['http://localhost:4200'],
-//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// }
-
-//const corsOptions = {};
-//app.use(cors<Request>(corsOptions)); // this is too braod need to narrow
-
-
-app.use(cors());
-
+app.use(cors<Request>(corsOptions));
 
 //app.use(authenticateKey); // all the routes below
 
