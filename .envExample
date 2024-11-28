@@ -1,5 +1,12 @@
-DB_CONN_STRING="mongodb+srv://lestrangeuna:passwordV@cluster0.fdfdsa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
+DB_CONN_STRING="mongodb+srv://lestrangeuna:jUOEJbsR6Crwf3GM@cluster0.zuzco.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 DB_NAME="Web2_2024"
 
 
 PORT=3000
+
+JWTSECRET = "una is really great"
+REFRESHSECRET = "una is still really great"
+
+JWTEXPIRES = "5 mins"
+REFRESHEXPIRES = "30 days"

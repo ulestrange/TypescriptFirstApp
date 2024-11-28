@@ -8,6 +8,7 @@ import {
   getGradeHistoryByID,
   deleteGradeHistory,
 } from "../controllers/gradeHistories";
+import { validJWTProvided } from "../middleware/auth.middleware";
 
 const router: Router = express.Router();
 
@@ -23,6 +24,6 @@ router.post("/", createGradeHistory);
 
 router.put("/:id", updateGradeHistory);
 
-router.delete("/:id", deleteGradeHistory);
+router.delete("/:id", validJWTProvided, deleteGradeHistory);
 
 export default router;

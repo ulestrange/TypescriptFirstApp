@@ -69,13 +69,13 @@ export const updateGradeHistory = async (req: Request, res: Response) => {
   
   let id:string = req.params.id;
   
-  const {class_id, studentID, scores} = req.body;
+  const {class_id, student_id, scores} = req.body;
 
   const newData: Partial<GradeHistory> = {}
 
 
   if (class_id) newData.class_id = class_id;
-  if(studentID) newData.student_id = studentID;
+  if(student_id) newData.student_id = student_id;
   if (scores) newData.scores = scores;
 
   // still need to validate the data
@@ -85,9 +85,11 @@ export const updateGradeHistory = async (req: Request, res: Response) => {
     const query = { _id: new ObjectId(id) };
     const result = await gradeHistoriesCollection.updateOne(query, {$set : newData});
 
+console.table(result);
+
     if (result.modifiedCount > 0) {
       res.status(200).json({message : `Updated GradeHistory`})}
-    else if (result.matchedCount = 0){
+    else if (result.matchedCount = 1){
       res.status(400).json({message: `Failed to update grade History.`});
       }
       else 
