@@ -54,8 +54,9 @@ export const getUserById = async (req: Request, res: Response) => {
 export const createUser = async (req: Request, res: Response) => {
   // create a new user in the database
   try {
+   
 
-    let validateResult : Joi.ValidationResult = ValidateUser(req.body)
+   let validateResult : Joi.ValidationResult = ValidateUser(req.body)
 
     if (validateResult.error) {
       res.status(400).json(validateResult.error);
@@ -79,11 +80,13 @@ export const createUser = async (req: Request, res: Response) => {
       phonenumber : req.body.phonenumber,
       dateJoined : new Date(),
       lastUpdated :new Date(),
+      role: req.body.role
     }
+    console.table(newUser);
 
     newUser.hashedPassword = await argon2.hash(req.body.password)
 
-    //console.log(newUser.hashedPassword)
+    console.table(newUser)
 
     const result = await usersCollection.insertOne(newUser)
 

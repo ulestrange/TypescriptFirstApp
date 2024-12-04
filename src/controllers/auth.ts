@@ -62,7 +62,8 @@ const createAccessToken = (user: User | null) : string  => {
     const payload =
     {
         email: user?.email,
-        name: user?.name
+        name: user?.name,
+        role: user?.role
     }
     const token = jwtSign(payload, secret, {expiresIn : expiresTime }); 
 
