@@ -35,7 +35,8 @@ app.use(express.json());
 const corsOptions = {
   origin: ['http://localhost:4200', 'https://localhost:4200'],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204,
-  allowedHeaders: ['Content-Type', 'Authorization']
+  //allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }
 
 //const corsOptions = {};
