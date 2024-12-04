@@ -49,7 +49,9 @@ export const handleLogin = async (req: Request, res: Response) => {
 
         res.status(201)
         .cookie('refreshToken' , createRefreshToken(user),
-         {maxAge: 1 * 24 * 60 * 60 * 1000})
+         {maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true,
+          sameSite: 'none'
+         })
         .send({ accessToken: createAccessToken(user) });
 
 
@@ -118,7 +120,7 @@ const getSavedToken = (user : User) => {
 const createAccessToken = (user: User | null) : string  => {
 
     const secret = process.env.JWTSECRET || "not very secret";
-    const expiresTime = process.env.JWTEXPIRES || 300;
+    const expiresTime = process.env.JWTEXPIRES || 120;
     console.log(expiresTime);
     const payload =
     {
