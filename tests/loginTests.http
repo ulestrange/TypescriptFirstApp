@@ -1,5 +1,6 @@
 
-
+@endpoint1 = https://typescriptfirstapp-1.onrender.com/api/v1
+@endppoint2 =  http://localhost:3000/api/v1/auth
 
 
 
@@ -7,7 +8,7 @@
 ### Auth Request for a user with a valid password and email
 ## Expected result is a body with an access token
 # @name login
-POST http://localhost:3000/api/v1/auth HTTP/3.0
+POST {{endpoint1}}/auth HTTP/3.0
 content-type: application/json
 
 { 
