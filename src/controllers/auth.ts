@@ -90,8 +90,10 @@ export const handleRefresh = async (req: Request, res: Response) => {
     
       res.status(201)
       .cookie('refreshToken' , createRefreshToken(user),
-      {maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true,
-        secure: true, sameSite: 'none'
+      {maxAge: 1 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        secure: true, 
+        sameSite: 'none'
       })
       .send({ accessToken: createAccessToken(user) });
       return;
