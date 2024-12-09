@@ -14,13 +14,13 @@ content-type: application/json
 
 ### POST Request for a login
 ## Expected result is a token with a payload that inlcudes a role of admin
+# @name loginAdmin
 POST http://localhost:3000/api/v1/auth HTTP/3.0
 content-type: application/json
 
 {
-   "email": "a@gmail.com",
+   "email": "ad@gmail.com",
    "password" : "password"
-
 }
 
 
@@ -37,7 +37,7 @@ content-type: application/json
 
 ###
 @accessToken = {{login.response.body.accessToken}}
-
+@accessTokenAdmin = {{loginAdmin.response.body.accessToken}}
 
 ### this should fail because there is no token
 ###
@@ -50,7 +50,7 @@ content-type: application/json
 
 DELETE http://localhost:3000/api/v1/users/66f1428fd79bf0c5ae9988 HTTP/1.1
 content-type: application/json
-Authorization: Bearer {{accessToken}}
+Authorization: Bearer {{accessTokenAdmin}}
 
 
 

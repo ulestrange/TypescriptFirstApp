@@ -9,8 +9,8 @@
 POST {{endpoint}}/users HTTP/3.0
 content-type: application/json
 
-{ "name" : "U Admin",
-   "email": "a@gmail.com",
+{ "name" : "Admin ",
+   "email": "ad@gmail.com",
    "password" : "password",
    "role": "admin"
 }
@@ -60,7 +60,7 @@ content-type: application/json
    "email": "jdoe123@gmail.com"}
 
 ###
-DELETE {{endpoint}}/66f1428fd79bf0c5ae9988 HTTP/1.1
+DELETE {{endpoint}}/users/66f1428fd79bf0c5ae9988 HTTP/1.1
 content-type: application/json
 
 
@@ -71,5 +71,5 @@ GET http://localhost:3000/api/v1/users HTTP/1.1
 x-api-key: blahblah
 
 ###
-GET http://localhost:3000/api/v1/users/66f2b2e00d84fa58146f53d9 HTTP/1.1
+GET http://localhost:3000/api/v1/users/6751d98c873a9470c33289a4
 x-api-key: blahblah
